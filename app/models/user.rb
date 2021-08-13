@@ -30,6 +30,14 @@ class User < ApplicationRecord
     followings.include?(user)
   end
   
+  def follower?(user)
+    followers.include?(user)
+  end
+  
+  def matchers
+    followings & followers
+  end
+  
   def self.looks(searches,words)
     if searches == "perfect_match"
       @user = User.where("name Like?","#{words}")
