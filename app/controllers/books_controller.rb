@@ -1,9 +1,12 @@
 class BooksController < ApplicationController
   before_action :ensure_correct_user, only: [:update,:edit]
+  impressionist :actions=> [:show]
+
 
 
   def show
     @book = Book.find(params[:id])
+    impressionist(@book, nil, unique: [:ip_address])
     @book_new = Book.new
     @user = @book.user
     @book_comment = BookComment.new
